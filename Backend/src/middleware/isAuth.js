@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-async function isAuth(req,res,next){
+export async function isAuth(req,res,next){
    try {
     const{ token} = req.cookies
     if(!token){
@@ -16,7 +16,7 @@ async function isAuth(req,res,next){
         })
     }
 
-    req.id = decoded.id 
+    req.userId = decoded.userId 
     next()
    } catch (error) {
     return res.status(500).json({
@@ -25,5 +25,3 @@ async function isAuth(req,res,next){
     
    }
 }
-
-export default isAuth

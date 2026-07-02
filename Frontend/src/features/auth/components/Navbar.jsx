@@ -1,9 +1,11 @@
-import  { useState } from 'react';
+import  { useState, useContext } from 'react';
 import ProfileDropdown from '../components/ProfileDropdown';
 import profile from "../../../assets/profile.png"
+import { userDataContext } from '../../../context/UserContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { userData } = useContext(userDataContext);
 
   return (
     <nav className="bg-white border-b sticky top-0 z-50">
@@ -45,12 +47,12 @@ const Navbar = () => {
           {/* Profile Icon with Toggle */}
           <div className="relative flex flex-col items-center cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
             <img 
-              src={profile}
-              className="rounded-full" 
+              src={userData?.profilePic || profile}
+             className='rounded-full'
               alt="profile" 
-               width={50} height={40}
+               width={50} height={50}
             />
-            <span className="text-[10px] text-gray-500">Me</span>
+            {/* <span className="text-[12px] text-gray-500">Me</span> */}
             
             {/* Absolute Dropdown positioned below the icon */}
             {isOpen && <ProfileDropdown />}

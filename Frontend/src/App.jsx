@@ -13,8 +13,8 @@ const {userData} = useContext(userDataContext)
   return (
    <Routes>
     <Route path="/" element={userData ? <Home /> : <Navigate to="/login" />} />
-    <Route path="/login" element={userData ? <Login /> : <Navigate to="/login" />} />
-    <Route path="/register" element={userData ? <Register /> : <Navigate to="/register" />} />
+    <Route path="/login" element={userData ? <Navigate to="/" /> : <Login />} />
+    <Route path="/register" element={userData ? <Navigate to="/" /> : <Register />} />
    </Routes>
   )
 }
@@ -22,4 +22,4 @@ const {userData} = useContext(userDataContext)
 export default App
 
 
-// 4:58:00
+//   8 /35/00

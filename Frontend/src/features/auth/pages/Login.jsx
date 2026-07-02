@@ -29,7 +29,7 @@ const Login = () => {
 
      setLoading(false)
       navigate("/") 
-      setUserData(result.data)
+      setUserData(result.data.user)
       setEmail("")
       setPassword("")
 

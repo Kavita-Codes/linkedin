@@ -32,7 +32,7 @@ const Register = () => {
       },{withCredentials:true})
       console.log("Registration successful:", result.data)
       setLoading(false)
-      setUserData(result.data)
+      setUserData(result.data.user)
       navigate("/")
       setFirstName("")
       setLastName("")
