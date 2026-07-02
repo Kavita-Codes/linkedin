@@ -1,12 +1,13 @@
 import "dotenv/config"
-import app from "./src/app.js"
+import server from "./src/app.js"
 import connectToDB from "./src/config/database.js"
+import { Server } from "socket.io"
 
 const PORT = process.env.PORT || 3000
 
 try {
     await connectToDB()
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log("server is running")
     })
 } catch (error) {

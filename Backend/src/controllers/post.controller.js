@@ -1,3 +1,4 @@
+import { io } from "../app.js";
 import uploadOnCloudinary from "../config/cloudinary.js"
 import Post from "../models/post.model.js"
 
@@ -78,6 +79,7 @@ export async function likePost(req,res){
         }
 
         await post.save()
+        io.emit("likedUpdate" , {postId , likes:post.likes})
 
         return res.status(200).json({
             message:"post liked successfully",
@@ -117,6 +119,7 @@ export async function commentPost(req,res){
         })
 
         await post.save()
+           io.emit("commentAdded" , {postId , comments:post.comments})
 
         post = await Post.findById(postId).populate("comments.user", "firstName lastName profilePic headline")
 

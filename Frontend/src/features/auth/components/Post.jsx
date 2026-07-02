@@ -6,6 +6,9 @@ import moment from "moment"
 import { authDataContext } from '../../../context/AuthContext';
 import { userDataContext } from '../../../context/UserContext';
 import axios from 'axios';
+import { io } from 'socket.io-client';
+
+let socket =io("http://localhost:3000")
 
 const Post = ({ id , author, image, description, likes, comments , createdAt }) => {
   const authorName = author ? `${author.firstName || ""} ${author.lastName || ""}`.trim() : "User";
@@ -24,6 +27,28 @@ const Post = ({ id , author, image, description, likes, comments , createdAt }) 
 
   let {serverUrl} = useContext(authDataContext)
   let {userData, getPosts} = useContext(userDataContext)
+
+  useEffect(() => {
+    socket.on("likeUpdated" , (postId , likes) =>{
+      if(postId === id){
+        setPostss(likes)
+      }
+    })
+
+    socket.on("commentAdded" , ({postId , comments}) =>{
+      if(postId === id){
+        setPostComments(comments)
+      }}
+    )
+
+   
+    return () => {
+      socket.off("likeUpdated")
+      socket.off("commentAdded")
+    }
+
+  }, [id]);
+
 
   useEffect(() => {
     setPostss(Array.isArray(likes) ? likes : []);
