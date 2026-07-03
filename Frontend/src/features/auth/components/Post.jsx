@@ -1,12 +1,13 @@
 
 import { useContext, useEffect, useState } from 'react';
-import { ThumbsUp, MessageSquare, MoreHorizontal } from 'lucide-react';
+import { ThumbsUp, MessageSquare } from 'lucide-react';
 import profile from "../../../assets/profile.png";
 import moment from "moment"
 import { authDataContext } from '../../../context/AuthContext';
 import { userDataContext } from '../../../context/UserContext';
 import axios from 'axios';
 import { io } from 'socket.io-client';
+import ConnectionButton from './ConnectionButton';
 
 let socket =io("http://localhost:3000")
 
@@ -133,9 +134,11 @@ const Post = ({ id , author, image, description, likes, comments , createdAt }) 
             </p>
           </div>
         </div>
-        <button className="text-gray-400 hover:text-gray-600">
-          <MoreHorizontal size={20} />
-        </button>
+        {userData?. _id && author?._id && userData._id !== author._id && (
+          <div className="ml-2">
+            <ConnectionButton userId={author._id} />
+          </div>
+        )}
       </div>
 
       {/* Content */}

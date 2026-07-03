@@ -5,11 +5,12 @@ import { isAuth } from "../middleware/isAuth.js";
 
 let connectionRouter = express.Router()
 
-connectionRouter.get("/send/:id" ,isAuth, sendConnection)
-connectionRouter.get("/send/:connectionId" ,isAuth, acceptConnection)
-connectionRouter.get("/reject/:connectionId" , isAuth , rejectConnection )
-connectionRouter.get("/get-status/:userId", getConnections)
-connectionRouter.get("/remove/:userId", isAuth, removeConnection)
+connectionRouter.post("/send/:id" ,isAuth, sendConnection)
+connectionRouter.put("/send/:connectionId" ,isAuth, acceptConnection)
+connectionRouter.put("/reject/:connectionId" , isAuth , rejectConnection )
+connectionRouter.post("/get-status/:userId", isAuth, getConnections)
+connectionRouter.get("/get-status/:userId", isAuth, getConnections)
+connectionRouter.delete("/remove/:userId", isAuth, removeConnection)
 connectionRouter.get("/requests" ,isAuth , getConnectionRequest)
 connectionRouter.get("/" , isAuth , getUserConnections)
 

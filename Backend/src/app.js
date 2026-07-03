@@ -22,6 +22,8 @@ app.use(cors({
     origin: "http://localhost:5173"
 }))
 
+export const userSocketMap = new Map()                     // for to connect a perticular using socket.io  not globally jaye //  map
+
 export const io = new Server(server,{
     cors:({
     credentials: true,
@@ -31,6 +33,11 @@ export const io = new Server(server,{
 
 io.on("connection" , (socket)=>{
     console.log("user connected" , socket.id)
+
+    socket.on("addUser" , (userId)=>{
+        userSocketMap.set(userId , socket.id)
+        console.log(userSocketMap)
+    })
 
     socket.on("disconnect" , (socket)=>{
         console.log("user disconnected" , socket.id)
@@ -46,4 +53,4 @@ app.use("/api/connection", connectionRouter)
 export default server
 
 
-// 10:32:00
+

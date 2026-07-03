@@ -49,7 +49,9 @@ export async function registerController(req,res){
         res.cookie("token",token ,{
             httpOnly:true,
             maxAge:7*24*60*60*1000,
-            secure:process.env.NODE_ENVIRONMENT === "production"       //if production then return true  // in development we use secure:false
+            secure: process.env.NODE_ENVIRONMENT === "production",
+            sameSite: "none",
+            path: "/"
         })
 
         return res.status(201).json({
@@ -105,7 +107,9 @@ export async function loginController(req,res){
         res.cookie("token",token ,{
             httpOnly:true,
             maxAge:7*24*60*60*1000,
-            secure:process.env.NODE_ENVIRONMENT === "production"       //if production then return true  // in development we use secure:false
+            secure: process.env.NODE_ENVIRONMENT === "production",
+            sameSite: "none",
+            path: "/"
         })
 
         return res.status(200).json({

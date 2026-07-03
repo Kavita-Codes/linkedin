@@ -2,10 +2,13 @@ import  { useState, useContext } from 'react';
 import ProfileDropdown from '../components/ProfileDropdown';
 import profile from "../../../assets/profile.png"
 import { userDataContext } from '../../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { userData } = useContext(userDataContext);
+
+  let navigate = useNavigate()
 
   return (
     <nav className="bg-white border-b sticky top-0 z-50">
@@ -36,7 +39,7 @@ const Navbar = () => {
           
           <div className="flex flex-col items-center cursor-pointer text-gray-500 hover:text-black">
             <span className="text-xl">👥</span>
-            <span className="text-[10px]">My Network</span>
+            <span className="text-[10px]" onClick={()=>navigate("/network")}>My Network</span>
           </div>
 
             <div className="flex flex-col items-center cursor-pointer text-gray-500 hover:text-black">

@@ -24,7 +24,7 @@ const Login = () => {
     }
 
     try {
-      const result = await axios.post(serverUrl + "/api/auth/login", userData)
+      const result = await axios.post(serverUrl + "/api/auth/login", userData, { withCredentials: true })
       console.log("Login successful:", result.data)
 
      setLoading(false)
