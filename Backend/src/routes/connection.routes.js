@@ -6,7 +6,7 @@ import { isAuth } from "../middleware/isAuth.js";
 let connectionRouter = express.Router()
 
 connectionRouter.post("/send/:id" ,isAuth, sendConnection)
-connectionRouter.put("/send/:connectionId" ,isAuth, acceptConnection)
+connectionRouter.put("/accept/:connectionId" ,isAuth, acceptConnection)
 connectionRouter.put("/reject/:connectionId" , isAuth , rejectConnection )
 connectionRouter.post("/get-status/:userId", isAuth, getConnections)
 connectionRouter.get("/get-status/:userId", isAuth, getConnections)

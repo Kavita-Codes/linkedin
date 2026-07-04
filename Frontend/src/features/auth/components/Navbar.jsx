@@ -17,7 +17,7 @@ const Navbar = () => {
         {/* Left Side: Logo and Search */}
         <div className="flex items-center gap-3 w-full md:w-auto">
           {/* LinkedIn Logo Placeholder */}
-          <div className="text-blue-700 font-bold text-3xl cursor-pointer">in</div>
+          <div className="text-blue-700 font-bold text-3xl cursor-pointer" onClick={navigate("/")}>in</div>
           
           {/* Search Bar */}
           <div className="bg-gray-100 flex items-center px-3 py-1.5 rounded w-full md:w-64 border border-gray-200">

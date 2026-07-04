@@ -22,6 +22,25 @@ const Network = () => {
     }
  }
 
+const handleAcceptConnection = async(requestId)=>{
+  try {
+      let result = await axios.put(`${serverUrl}/api/connection/accept/${requestId}` ,{} ,{withCredentials:true})
+       setConnections(connections.filter((connection)=>connection._id !== requestId))
+      
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+const handleRejectConnection = async(requestId)=>{
+  try {
+      let result = await axios.put(`${serverUrl}/api/connection/reject/${requestId}` ,{} ,{withCredentials:true})
+       setConnections(connections.filter((connection)=>connection._id !== requestId))
+  } catch (error) {
+      console.log(error)
+  }
+}
+
 useEffect(()=>{
     handleGetRequests()
 },[])
@@ -58,10 +77,10 @@ return (
 
               {/* Right Side: Accept/Reject Buttons */}
               <div className='flex items-center gap-2'>
-                <button className='p-2 rounded-full border-2 border-blue-500 text-blue-500 hover:bg-blue-50 transition'>
+                <button className='p-2 rounded-full border-2 border-blue-500 text-blue-500 hover:bg-blue-50 transition' onClick={()=>handleAcceptConnection(connection._id)}>
                   <Check size={24} />
                 </button>
-                <button className='p-2 rounded-full border-2 border-gray-400 text-gray-400 hover:bg-gray-100 transition'>
+                <button className='p-2 rounded-full border-2 border-gray-400 text-gray-400 hover:bg-gray-100 transition'  onClick={()=>handleRejectConnection(connection._id)}>
                   <X size={24} />
                 </button>
               </div>
